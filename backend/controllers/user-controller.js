@@ -28,10 +28,12 @@ export const signup = async (req, res, next) => {
       .json({ message: "User Already Exists! Login Instead" });
   }
   const hashedPassword = bcrypt.hashSync(password);
+
   const user = new User({
     name,
     email,
     password: hashedPassword,
+    blogs: [],
   });
 
   try {
