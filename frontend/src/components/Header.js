@@ -11,21 +11,25 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../store";
-
+import { useStyles } from "./utils";
 const Header = () => {
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const classes = useStyles();
   const dispath = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
   const [value, setValue] = useState();
   return (
     <AppBar
       position="sticky"
       sx={{
         background:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(24,89,126,1) 35%, rgba(0,212,255,1) 100%)",
+          "linear-gradient(90deg, rgba(58,75,180,1) 2%, rgba(116,49,110,1) 36%, rgba(2,0,161,1) 73%, rgba(69,92,252,1) 100%)",
       }}
     >
       <Toolbar>
-        <Typography variant="h4">BlogsApp</Typography>
+        <Typography className={classes.font} variant="h4">
+          BlogsApp
+        </Typography>
         {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">
             <Tabs
@@ -33,8 +37,24 @@ const Header = () => {
               value={value}
               onChange={(e, val) => setValue(val)}
             >
-              <Tab LinkComponent={Link} to="/blogs" label="All Blogs" />
-              <Tab LinkComponent={Link} to="/myblogs" label="My Blogs" />
+              <Tab
+                className={classes.font}
+                LinkComponent={Link}
+                to="/blogs"
+                label="All Blogs"
+              />
+              <Tab
+                className={classes.font}
+                LinkComponent={Link}
+                to="/myBlogs"
+                label="My Blogs"
+              />
+              <Tab
+                className={classes.font}
+                LinkComponent={Link}
+                to="/blogs/add"
+                label="Add Blog"
+              />
             </Tabs>
           </Box>
         )}

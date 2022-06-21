@@ -1,5 +1,6 @@
-const utils = () => {
-  return <div>utils</div>;
-};
-
-export default utils;
+import { makeStyles } from "@mui/styles";
+export const useStyles = makeStyles({
+  font: {
+    fontFamily: "Roboto !important",
+  },
+});
