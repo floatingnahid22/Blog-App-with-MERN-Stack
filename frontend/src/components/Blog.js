@@ -8,9 +8,9 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
-  Typography,
 } from "@mui/material";
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStyles } from "./utils";
 const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
@@ -30,6 +30,10 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
     deleteRequest()
       .then(() => navigate("/"))
       .then(() => navigate("/blogs"));
+  };
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
   };
   return (
     <div>
@@ -78,13 +82,13 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
         <CardContent>
           <hr />
           <br />
-          <Typography
-            className={classes.font}
-            variant="body2"
-            color="text.secondary"
-          >
-            <b>{userName}</b> {": "} {description}
-          </Typography>
+          <p>
+            <b>{userName}</b> {": "}
+            {isReadMore ? description.slice(0, 100) : description}
+            <span onClick={toggleReadMore} className="read-or-hide">
+              {isReadMore ? <b>...read more</b> : <b>...show less</b>}
+            </span>
+          </p>
         </CardContent>
       </Card>
     </div>
